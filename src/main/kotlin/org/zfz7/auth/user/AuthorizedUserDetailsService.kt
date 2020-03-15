@@ -22,8 +22,8 @@ class AuthorizedUserDetailsService:UserDetailsService{
     }
 
     @Throws(IllegalArgumentException::class)
-    fun createAuthorizedUser(username: String, clearTextPassword: String, roles: List<String>){
-        val newUser = AuthorizedUser(username,clearTextPassword, roles)
+    fun createAuthorizedUser(username: String, hashedPassword: String, roles: List<String>){
+        val newUser = AuthorizedUser(username,hashedPassword, roles)
         authorizedUserRepository.save(newUser)
 
     }
