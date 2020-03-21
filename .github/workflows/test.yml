@@ -17,8 +17,7 @@ jobs:
       - name: Setup Postgres DB
         uses: harmon758/postgresql-action@v1
         with:
-          postgresql version: '12.2'
-          postgresql db: 'spring-jwt'
+          postgresql db: spring-jwt
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
