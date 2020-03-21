@@ -161,6 +161,4 @@ class AuthApplicationTests {
                 .andExpect(status().isForbidden)
                 .andReturn()
     }
-
-
 }
