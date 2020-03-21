@@ -25,5 +25,5 @@ jobs:
           arguments: clean build -x test
       - name: Test
         uses: eskatos/gradle-command-action@v1
-          with:
-            arguments: clean build -x test
+        with:
+          arguments: test
