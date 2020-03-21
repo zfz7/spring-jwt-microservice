@@ -139,7 +139,7 @@ class AuthApplicationTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer $jwtToken"))
-                .andExpect(status().isOk)
+                .andExpect(status().isForbidden)
                 .andReturn()
     }
 
