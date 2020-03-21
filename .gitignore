@@ -3,3 +3,5 @@ build/
 out/
 .DS_Store
 .envrc
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
