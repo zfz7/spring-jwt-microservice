@@ -16,7 +16,7 @@ import org.zfz7.auth.user.AuthorizedUserDetailsService
 
 
 @EnableWebSecurity
-class SecurityConfiguration : WebSecurityConfigurerAdapter(){
+class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     @Autowired
     lateinit var authorizedUserDetailsService: AuthorizedUserDetailsService
@@ -27,24 +27,27 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter(){
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(authorizedUserDetailsService)
     }
+
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/authenticate").permitAll()
-                    .antMatchers("/create_user").permitAll()
-                    .antMatchers("/hello").hasRole("USER")
-                    .anyRequest().authenticated()
+                .antMatchers("/authenticate").permitAll()
+                .antMatchers("/create_user").permitAll()
+                .antMatchers("/validate").authenticated()
+                .antMatchers("/hello").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
     }
+
     @Bean
-    fun passwordEncoder(): PasswordEncoder{
+    fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 
     @Bean
-    override fun  authenticationManagerBean():AuthenticationManager {
+    override fun authenticationManagerBean(): AuthenticationManager {
         return super.authenticationManagerBean()
     }
 }

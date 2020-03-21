@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface AuthorizedUserRepository: JpaRepository<AuthorizedUser, Long> {
-    fun findByUsername(username : String): Optional<AuthorizedUser>
+interface AuthorizedUserRepository : JpaRepository<AuthorizedUser, Long> {
+    fun findByUsername(username: String): Optional<AuthorizedUser>
 }

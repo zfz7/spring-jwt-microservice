@@ -8,22 +8,22 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class AuthorizedUserDetailsService:UserDetailsService{
+class AuthorizedUserDetailsService : UserDetailsService {
 
     @Autowired
     lateinit var authorizedUserRepository: AuthorizedUserRepository
 
     override fun loadUserByUsername(username: String?): UserDetails? {
-        username?.let{
+        username?.let {
             val user = authorizedUserRepository.findByUsername(username)
-            user.orElseThrow{ UsernameNotFoundException("No user found for:$username") }
+            user.orElseThrow { UsernameNotFoundException("No user found for:$username") }
             return AuthorizedUserDetails(user.get())
-        }?: return null
+        } ?: return null
     }
 
     @Throws(IllegalArgumentException::class)
-    fun createAuthorizedUser(username: String, hashedPassword: String, roles: List<String>){
-        val newUser = AuthorizedUser(username,hashedPassword, roles)
+    fun createAuthorizedUser(username: String, hashedPassword: String, roles: List<String>) {
+        val newUser = AuthorizedUser(username, hashedPassword, roles)
         authorizedUserRepository.save(newUser)
 
     }

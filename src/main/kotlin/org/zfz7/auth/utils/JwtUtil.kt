@@ -11,7 +11,7 @@ import kotlin.collections.HashMap
 
 @Service
 class JwtUtil {
-    private val SECRET_KEY = "secret"
+    private val SECRET_KEY = "secret" //TODO no hard coded passwords
     fun extractUsername(token: String): String {
         return extractClaim(token, Function { obj: Claims -> obj.subject })
     }
@@ -26,7 +26,7 @@ class JwtUtil {
     }
 
     private fun extractAllClaims(token: String): Claims {
-         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).body
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).body
     }
 
     private fun isTokenExpired(token: String): Boolean {
@@ -48,7 +48,7 @@ class JwtUtil {
     }
 
     fun validateToken(token: String, userDetails: UserDetails?): Boolean {
-        userDetails?.let{
+        userDetails?.let {
             val username = extractUsername(token)
             return username == userDetails.username && !isTokenExpired(token)
         }

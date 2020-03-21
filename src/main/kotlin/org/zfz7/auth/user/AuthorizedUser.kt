@@ -19,16 +19,17 @@ class AuthorizedUser(
 )
 
 class SensorTypeEnumListConverter : AttributeConverter<List<String>?, String> {
-        override fun convertToDatabaseColumn(list: List<String>?): String? {
-                if (list == null) {
-                        return null
-                }
-                return list.joinToString(",")
+    override fun convertToDatabaseColumn(list: List<String>?): String? {
+        if (list == null) {
+            return null
         }
-        override fun convertToEntityAttribute(joined: String?): List<String>? {
-                if (joined.isNullOrBlank()) {
-                        return listOf()
-                }
-                return joined.split(",")
+        return list.joinToString(",")
+    }
+
+    override fun convertToEntityAttribute(joined: String?): List<String>? {
+        if (joined.isNullOrBlank()) {
+            return listOf()
         }
+        return joined.split(",")
+    }
 }
