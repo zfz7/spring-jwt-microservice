@@ -23,6 +23,8 @@ jobs:
         with:
           postgresql version: '12.2'
           postgresql db: 'spring-jwt'
+          postgresql user: root
+          postgresql password:
       - name: Build with Gradle
         run: ./gradlew clean build -x test
 
