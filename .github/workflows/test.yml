@@ -22,6 +22,7 @@ jobs:
         uses: harmon758/postgresql-action@v1
         with:
           postgresql version: '12.2'
+          postgresql db: 'spring-jwt'
       - name: Build with Gradle
         run: ./gradlew clean build -x test
 
