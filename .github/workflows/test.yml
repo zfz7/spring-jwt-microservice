@@ -7,14 +7,15 @@ on:
   pull_request:
 
 jobs:
-  build:
-
+  vm-jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:12.2
+        image: postgres:10.8
         env:
-          POSTGRES_DB: spring-jwt
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           # will assign a random free host port
           - 5432/tcp
