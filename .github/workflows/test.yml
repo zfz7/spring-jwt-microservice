@@ -13,8 +13,6 @@ jobs:
       postgres:
         image: postgres:12.2
         env:
-          POSTGRES_USER: post
-          POSTGRES_PASSWORD: post
           POSTGRES_DB: spring-jwt
         ports:
           # will assign a random free host port
@@ -35,3 +33,9 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
+        working-directory: ./postgres
+          env:
+            # use localhost for the host here because we are running the job on the VM.
+            # If we were running the job on in a container this would be postgres
+            POSTGRES_HOST: localhost
+            POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
