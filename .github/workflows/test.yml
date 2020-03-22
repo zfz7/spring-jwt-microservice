@@ -9,13 +9,18 @@ on:
 jobs:
   vm-jobs:
     runs-on: ubuntu-latest
-
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: ''
+          POSTGRES_PASSWORD: ''
+          POSTGRES_DB: spring-jwt
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: huaxk/postgis-action@v1
-        with:
-          postgresql password: '' # This environment variable sets the superuser password for PostgreSQL, maybe string or secrets, the default superuser is defined by the input environment variable: postgresql user.
-          postgresql user: ''  # This optional environment variable is used in conjunction with postgresql password to set a user and its password. This variable will create the specified user with superuser power and a database with the same name. If it is not specified, then the default user of 'postgres' will be used.
-          postgresql db: 'spring-jwt'  # This optional environment variable can be used to define a different name for the default database that is created when the image is first started. If it is not specified, then the value of postgresql user will be used.
 
       - uses: actions/checkout@v1
 
