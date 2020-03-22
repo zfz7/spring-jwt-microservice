@@ -9,21 +9,14 @@ on:
 jobs:
   vm-jobs:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:12.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: spring-jwt
-        ports:
-          # will assign a random free host port
-          - 5432/tcp
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v1
+
+      - name: Install Posgres
+        run: sudo apt update && sudo apt install postgresql postgresql-contrib
+
+      - name: Create DB
+        run: sudo su - postgres -c "createdb spring-jwt"
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
