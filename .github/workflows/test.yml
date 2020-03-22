@@ -8,15 +8,18 @@ on:
 
 jobs:
   vm-jobs:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
 
       - name: Install Posgres
-        run: sudo apt update && sudo apt install postgresql postgresql-contrib
+        run: brew install postgres
+
+      - name: Install Posgres
+        run: brew services start postgres
 
       - name: Create DB
-        run: sudo su createdb spring-jwt
+        run: createdb spring-jwt
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
