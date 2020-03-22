@@ -13,8 +13,6 @@ jobs:
       postgres:
         image: postgres:12.2
         env:
-          POSTGRES_USER:
-          POSTGRES_PASSWORD:
           POSTGRES_DB: spring-jwt
         ports:
           - 5432/tcp
