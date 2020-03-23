@@ -6,3 +6,4 @@ out/
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
 pgdata/
+pgdevdata/
