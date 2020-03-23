@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: spring_jwt
+    volumes:
+    - ./pgdata:/var/lib/postgresql/data
+    ports:
+    - "5432:5432"
+  web:
+    image: auth-service
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"

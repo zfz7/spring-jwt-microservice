@@ -5,3 +5,4 @@ out/
 .envrc
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
+pgdata/
