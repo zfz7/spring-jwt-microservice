@@ -7,11 +7,9 @@ on:
   pull_request:
 
 jobs:
-  vm-jobs:
-    runs-on: ubuntu-latest
-
+  container-job:
     services:
-      db:
+      postgres_db:
         image: postgres:12.2
         env:
           POSTGRES_USER: postgres
@@ -19,9 +17,13 @@ jobs:
           POSTGRES_DB: spring_jwt
         ports:
           # will assign a random free host port
-          - 5432/tcp
+          - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+  vm-jobs:
+    runs-on: ubuntu-latest
+
 
     steps:
       - uses: actions/checkout@v1
