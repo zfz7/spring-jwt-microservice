@@ -12,7 +12,7 @@ jobs:
     services:
       postgres_db:
         image: postgres
-        environment:
+        env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: spring_jwt
