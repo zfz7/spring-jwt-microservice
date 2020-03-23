@@ -147,13 +147,14 @@ class AuthApplicationTests {
     @DisplayName("Failed JWT Token")
     fun authTest7() {
         every { authorizedUserRepository.findByUsername("test1") } returns Optional.of(AuthorizedUser("test1", password, listOf("USER")))
+        every { authorizedUserRepository.findByUsername("test2") } returns Optional.of(AuthorizedUser("test2", password, listOf("USER")))
         mockMvc.perform(MockMvcRequestBuilders.get("/hello")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer "))
                 .andExpect(status().isForbidden)
                 .andReturn()
 
-        val invalidToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTU4NDI5NjcxMSwiaWF0IjoxNTg0MjYwNzExfQ.eumW6coCIgV08gM6g9hVX9xEyQnKvIyOLqpnAAweB15"
+        val invalidToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MiIsImV4cCI6MTU4NDk1MzI5MiwiaWF0IjoxNTg0OTE3MjkyfQ==.kxx-rjooN4uXnPWQqKw0YgMhNFqC75B0aMW_PlennYU"
 
         mockMvc.perform(MockMvcRequestBuilders.get("/hello")
                         .contentType(MediaType.APPLICATION_JSON)
